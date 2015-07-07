@@ -2,30 +2,15 @@ require 'rubygems'
 require 'watir-webdriver'
 require 'headless'
 
-
-login_url = "https://www.enbridgegas.com/myEnbridge/login.aspx"
-
 headless = Headless.new
 headless.start
-
 browser = Watir::Browser.new
 
-
-# pages = [
-#   'http://homestars.com/on/toronto/alarm-systems',
-#   'http://homestars.com/on/toronto/electricians',
-#   'http://homestars.com/on/toronto/general-contractors',
-#   'http://homestars.com/on/toronto/paint-wallpaper-contractors',
-#   'http://homestars.com/on/toronto/windows-doors',
-#   'http://homestars.com/on/toronto/fire-water-damage-restoration',
-#   'http://homestars.com/on/toronto/plumbing'
-# ]
 browser.goto("http://homestars.com/on/toronto/categories")
 pages = []
 links = browser.div(:class => "categories_alphas").links.each{|link| pages << link.href}
 
 pages.each do |service_url|
-    
   page = 1
   while page <= 10 do
       puts "Page #{page}: #{service_url[32..-1]}"
